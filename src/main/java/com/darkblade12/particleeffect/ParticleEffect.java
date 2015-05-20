@@ -1351,6 +1351,22 @@ public enum ParticleEffect {
         /**
          * Construct a new ordinary color
          * 
+         * @param color
+         *            Color from org.bukkit.Color
+         */
+        public OrdinaryColor(org.bukkit.Color color) {
+            if (color.getRed() == 0) {
+                this.red = 1;
+            } else {
+                this.red = color.getRed();
+            }
+            this.green = color.getGreen();
+            this.blue = color.getBlue();
+        }
+
+        /**
+         * Construct a new ordinary color
+         * 
          * @param red
          *            Red value of the RGB format
          * @param green
@@ -1367,7 +1383,11 @@ public enum ParticleEffect {
             if (red > 255) {
                 throw new IllegalArgumentException("The red value is higher than 255");
             }
-            this.red = red;
+            if (red == 0) {
+                this.red = 1;
+            } else {
+                this.red = red;
+            }
             if (green < 0) {
                 throw new IllegalArgumentException("The green value is lower than 0");
             }
